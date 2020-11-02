@@ -18,6 +18,6 @@ module.exports = {
     name:'minecraft',
     description:'minecraft',
     execute(message, args) {
-      message.channel.send(helpEmbed);
+      message.channel.send(minecraftEmbed);
     }
 };

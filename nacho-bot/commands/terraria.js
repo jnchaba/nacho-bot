@@ -18,6 +18,6 @@ module.exports = {
     name:'terraria',
     description:'terraria',
     execute(message, args) {
-    message.channel.send(helpEmbed);
+    message.channel.send(terrariaEmbed);
     }
 };
