@@ -35,7 +35,6 @@ Social Utilities
 </ul>
 User Interaction
 <ul>
-<li> Add compiling environment to run code on Nacho-Bot and display output </li>
 <li> StackOverflow search tool </li>
 </ul>
 
