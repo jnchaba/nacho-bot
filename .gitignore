@@ -1,2 +1,6 @@
 # Executables
 *.env
+
+# JSON config Files
+config.json
+servers.json
