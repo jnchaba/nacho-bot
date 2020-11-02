@@ -1,5 +1,5 @@
 <h1> Nacho-Bot: A custom-made Discord Bot</h1>
-<h3> About: </h3>
+<h3> About </h3>
 <p>
 <ul>
 <li> This bot was made using the Discord.js library. It is custom made for a Discord server used by my friends and I. </li>
