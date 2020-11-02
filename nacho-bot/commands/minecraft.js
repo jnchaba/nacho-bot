@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const { hal69420 } = require('../servers.json');
 module.exports = {
     name: 'minecraft',
     description: 'minecraft',
@@ -10,7 +11,7 @@ module.exports = {
           .setDescription('nacho-bot hosts a minecraft server!')
           .setThumbnail('https://biebs.files.wordpress.com/2013/02/minecraft_icon.png')
           .addFields(
-            { name: 'IP Address:', value: '136.56.29.213', inline: true }
+            { name: 'IP Address:', value: `${hal69420}`, inline: true }
           )
           .setImage('https://media.giphy.com/media/cuHjncTuHW40g/giphy.gif')
           .setTimestamp()

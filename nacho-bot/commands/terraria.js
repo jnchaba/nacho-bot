@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const { hal69420, terrariapass } = require('../servers.json');
 module.exports = {
     name: 'terraria',
     description: 'terraria',
@@ -10,8 +11,8 @@ module.exports = {
             .setDescription('nacho-bot hosts a terraria server!')
             .setThumbnail('https://www.decoygaming.com.au/wp-content/uploads/2013/10/terraria_icon.png')
             .addFields(
-                { name: 'IP Address:', value: '136.56.29.213', inline: true },
-                { name: 'Password', value: 'nachobot', inline: true }
+                { name: 'IP Address:', value: `${hal69420}`, inline: true },
+                { name: 'Password', value: `${terrariapass}`, inline: true }
             )
             .setImage('https://gamepedia.cursecdn.com/terraria_gamepedia/3/36/Sandstorm_in_a_bottle_animation.gif')
             .setTimestamp()
