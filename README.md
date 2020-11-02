@@ -10,7 +10,7 @@
 <ul>
 <li> Full error handling: Error messages are output to Discord alongside the console with a description of what caused the error </li>
  </ul>
- ![example of an error](Docs/error.PNG?raw=true)
+ ![example of an error](Docs/error.PNG)
  <ul>
 <li> Commands to show the login information for game servers hosted alongside Nacho-Bot </li>
  <li> Spam message script to hidden channel to increase pokemon drop rates from PokeTwo </li>
