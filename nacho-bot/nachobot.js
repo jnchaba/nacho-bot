@@ -60,6 +60,6 @@ var interval = setInterval (function (){
         i = 1;
     }
     
-}, 45000);
+}, 120000);
 
 client.login(token);
