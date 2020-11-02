@@ -8,7 +8,7 @@
 <h3> Functionality </h3>
 <p>
 <ul>
-<li> Full error handling: Error messages are output to Discord alongside the console with a description of what caused the error </li>
+<li> Full error handling: Humourous, yet informative error messages are output to Discord alongside the console with a description of what caused the error </li>
  </ul>
  
  
