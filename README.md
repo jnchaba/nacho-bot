@@ -8,7 +8,14 @@
 <h3> Functionality </h3>
 <p>
 <ul>
-<li> Full error handling: Error messages are output to Discord alongside the console with a description of what caused the error </li>
+<li> Full error handling: Informative error messages are output to Discord alongside the console with a description of what caused the error, alongside some programming joke to lift your spirits. </li>
+ </ul>
+ 
+ 
+![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/error.PNG?raw=true)
+ 
+ 
+ <ul>
 <li> Commands to show the login information for game servers hosted alongside Nacho-Bot </li>
  <li> Spam message script to hidden channel to increase pokemon drop rates from PokeTwo </li>
 <li> Funny memes </li>
@@ -28,7 +35,6 @@ Social Utilities
 </ul>
 User Interaction
 <ul>
-<li> Add compiling environment to run code on Nacho-Bot and display output </li>
 <li> StackOverflow search tool </li>
 </ul>
 
