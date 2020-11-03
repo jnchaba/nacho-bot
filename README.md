@@ -17,7 +17,10 @@
  
  <ul>
 <li> Commands to show the login information for game servers hosted alongside Nacho-Bot </li>
- <li> Spam message script to hidden channel to increase pokemon drop rates from PokeTwo </li>
+ 
+<li> Integration with servers showing player stats </li>
+
+<li> Spam message script to hidden channel to increase pokemon drop rates from PokeTwo </li>
 <li> Funny memes </li>
 </ul>
 </p>
