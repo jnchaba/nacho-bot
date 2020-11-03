@@ -17,9 +17,17 @@
  
  <ul>
 <li> Commands to show the login information for game servers hosted alongside Nacho-Bot </li>
- 
-<li> Integration with servers showing player stats </li>
+</ul>
 
+![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/terraria.png?raw=true)
+
+<ul>
+<li> Integration with servers showing player stats </li>
+</ul>
+
+![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/mcstatus.png?raw=true)
+
+<ul>
 <li> Spam message script to hidden channel to increase pokemon drop rates from PokeTwo </li>
 <li> Funny memes </li>
 </ul>
