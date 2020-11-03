@@ -11,11 +11,12 @@ module.exports = {
           .setDescription('nacho-bot hosts a minecraft server!')
           .setThumbnail('https://biebs.files.wordpress.com/2013/02/minecraft_icon.png')
           .addFields(
-            { name: 'IP Address:', value: `${hal69420}`, inline: true }
+            //{ name: 'IP Address:', value: `${hal69420}`, inline: true }
+            {name: 'Waiting on RAM', value: 'Current memory usage: 1.5GB/1.91GB'}
           )
           .setImage('https://media.giphy.com/media/cuHjncTuHW40g/giphy.gif')
           .setTimestamp()
-          .setFooter('Please be patient, server may be choppy until replacement ram comes in', 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=');
+          .setFooter('This server will be up once the replacement ram comes in', 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=');
 
         message.channel.send(minecraftEmbed);
     }
