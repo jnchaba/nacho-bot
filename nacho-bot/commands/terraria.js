@@ -16,7 +16,7 @@ module.exports = {
             )
             .setImage('https://gamepedia.cursecdn.com/terraria_gamepedia/3/36/Sandstorm_in_a_bottle_animation.gif')
             .setTimestamp()
-            .setFooter('Please be patient, server may be choppy until replacement ram comes in', 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=1');
+            .setFooter('New RAM is in! Server should be running much better!', 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=1');
 
         message.channel.send(terrariaEmbed);
     }
