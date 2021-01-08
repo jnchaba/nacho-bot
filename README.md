@@ -33,6 +33,7 @@
 </ul>
 <ul>
 <li> Displays maps for Escape From Tarkov, in discord </li>
+![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/nachoeftpng?raw=true)
 </ul>
 </p>
 <h3> Planned Features </h3>
