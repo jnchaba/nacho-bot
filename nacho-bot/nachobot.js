@@ -13,6 +13,7 @@ for (const file of commandFiles) {
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    client.user.setActivity('!nachohelp', {type: "WATCHING" });
 });
 
 client.on('message', message => {
