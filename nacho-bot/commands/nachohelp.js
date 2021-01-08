@@ -17,6 +17,7 @@ const helpEmbed = new Discord.MessageEmbed()
         { name: '!daddy', value: 'Info about this bot\'s daddy', inline: true },
         { name: '!mommy', value: 'Info about this bot\'s mommy', inline: true },
         { name: '!son', value: 'Info about this bot\'s son', inline: true },
+        { name: '\u200B', value: '\u200B' },
         { name: '!eft [map name]', value: 'Displays selected EFT Map', inline: true }
     )
     .setTimestamp()
