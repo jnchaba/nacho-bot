@@ -35,7 +35,7 @@
 <li> Displays maps for Escape From Tarkov, in discord </li>
 </ul>
 
-![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/nachoeftpng?raw=true)
+![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/nachoeft.png?raw=true)
 
 
 </p>
