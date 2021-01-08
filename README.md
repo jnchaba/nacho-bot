@@ -31,9 +31,8 @@
 <li> Spam message script to hidden channel to increase pokemon drop rates from PokeTwo </li>
 <li> Funny memes </li>
 </ul>
-
 <ul>
- <li> Displays maps for Escape From Tarkov, in discord </li>
+<li> Displays maps for Escape From Tarkov, in discord </li>
 </ul>
 </p>
 <h3> Planned Features </h3>
