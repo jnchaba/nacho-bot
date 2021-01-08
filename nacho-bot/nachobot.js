@@ -41,26 +41,4 @@ client.on('message', message => {
     }
 });
 
-var i = 1;
-
-var interval = setInterval (function (){
-    if (i === 1) {
-        client.guilds.cache.get("163008258645295104").channels.cache.get("769789622204629022").send("Searching for pokemon in tall grass...");
-        i = 2;
-    } else if (i === 2) {
-        client.guilds.cache.get("163008258645295104").channels.cache.get("769789622204629022").send("Pulling Brock away from female trainers...");
-        i = 3;
-    } else if (i === 3) {
-        client.guilds.cache.get("163008258645295104").channels.cache.get("769789622204629022").send("Blasting Team Rocket into Space...");
-        i = 4;
-    } else if (i === 4) {
-        client.guilds.cache.get("163008258645295104").channels.cache.get("769789622204629022").send("Petting Pikachu...");
-        i = 5;
-    } else if (i === 5) {
-        client.guilds.cache.get("163008258645295104").channels.cache.get("769789622204629022").send("Fighting the Elite Four...");
-        i = 1;
-    }
-    
-}, 120000);
-
 client.login(token);
