@@ -28,7 +28,6 @@
 ![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/mcstatus.png?raw=true)
 
 <ul>
-<li> Spam message script to hidden channel to increase pokemon drop rates from PokeTwo </li>
 <li> Funny memes </li>
 </ul>
 <ul>
