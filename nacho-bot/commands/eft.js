@@ -22,5 +22,8 @@ module.exports = {
         else if (args[0] === "woods") {
             message.channel.send(new MessageAttachment("./images/woods_map.png"));
         }
+        else if (args[0] === "labs") {
+            message.channel.send(new MessageAttachment("./images/labs_map.png"));
+        }
     }
 }
