@@ -25,5 +25,8 @@ module.exports = {
         else if (args[0] === "labs") {
             message.channel.send(new MessageAttachment("./images/labs_map.png"));
         }
+        else if (args[0] == "hideout") {
+            message.channel.send(new MessageAttachment("./images/hideout.png"));
+        }
     }
 }
