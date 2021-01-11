@@ -28,5 +28,8 @@ module.exports = {
         else if (args[0] == "hideout") {
             message.channel.send(new MessageAttachment("./images/hideout.png"));
         }
+        else if (args[0] == "quest") {
+            message.channel.send(new MessageAttachment("./images/quest.png"));
+        }
     }
 }
