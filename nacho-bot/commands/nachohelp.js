@@ -18,7 +18,9 @@ const helpEmbed = new Discord.MessageEmbed()
         { name: '!mommy', value: 'Info about this bot\'s mommy', inline: true },
         { name: '!son', value: 'Info about this bot\'s son', inline: true },
         { name: '\u200B', value: '\u200B' },
-        { name: '!eft [map name]', value: 'Displays selected EFT Map', inline: true }
+        { name: '!eft [map name]', value: 'Displays selected EFT Map', inline: true },
+        { name: '!wow [class] [spec]', value: 'Displays information for specified WoW class spec', inline: true },
+        { name: '!wow help', value: 'Additional help for wow commands', inline: true }
     )
     .setTimestamp()
     .setFooter('More commands coming soon!');
