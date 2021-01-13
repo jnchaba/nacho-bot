@@ -42,7 +42,7 @@ Escape from Tarkov
 World of Warcraft Commands
 <ul>
  <li> Command for individual classes directing to icy veins guides </li>
-<ul>
+</ul>
 </p>
 <h3> Planned Features </h3>
 <p>
