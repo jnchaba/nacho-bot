@@ -34,11 +34,14 @@
 Escape from Tarkov
 <ul>
 <li> Displays maps for Escape From Tarkov, in discord </li>
+ 
+![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/nachoeft.png?raw=true)
+ 
 <li> Displays hideout information for optimal hideout progression </li>
 <li> Displays quest information showing all items neccessary for quests </li>
 </ul>
 
-![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/nachoeft.png?raw=true)
+
 
 World of Warcraft Commands
 <ul>
