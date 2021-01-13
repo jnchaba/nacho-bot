@@ -30,6 +30,7 @@
 <ul>
 <li> Funny memes </li>
 </ul>
+
 Escape from Tarkov
 <ul>
 <li> Displays maps for Escape From Tarkov, in discord </li>
