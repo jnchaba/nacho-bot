@@ -33,6 +33,7 @@
 
 Escape from Tarkov
 <ul>
+ <li> Scrapes Tarkov-Market.com for top 20 results, and displays prices in an embedded discord message </li>
 <li> Displays maps for Escape From Tarkov, in discord </li>
 </ul>
 
