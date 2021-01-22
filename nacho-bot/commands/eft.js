@@ -17,11 +17,11 @@ module.exports = {
                 .setDescription("Number of items scraped: " + count);
             for (let index = 0; index < count; index++) {
                     scrapeEmbed.addField('Item:', words[index].name);
-                    scrapeEmebed.addField('Avg Price:', word[index].avg);
+                    scrapeEmbed.addField('Avg Price:', word[index].avg);
                 }
             scrapeEmbed.setTimestamp();
             scrapeEmbed.setFooter('Command currently being developed', 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=');
-            message.channel.send(scrapEmbed);
+            message.channel.send(scrapeEmbed);
         }
         if (args[0] === "customs") {
             message.channel.send(new MessageAttachment("./images/customs_map.png"));
