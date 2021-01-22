@@ -16,8 +16,8 @@ module.exports = {
                 .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
                 .setDescription("Number of items scraped: " + count);
             for (let index = 0; index < count; index++) {
-                    scrapeEmbed.addField('Item:', words[index].name);
-                    scrapeEmbed.addField('Avg Price:', words[index].avg);
+                    scrapeEmbed.addField('Item:', words[index].name, true);
+                    scrapeEmbed.addField('Avg Price:', words[index].avg, true);
                 }
             scrapeEmbed.setTimestamp();
             scrapeEmbed.setFooter('Command currently being developed', 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=');
