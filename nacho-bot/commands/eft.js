@@ -17,7 +17,7 @@ module.exports = {
                 .setDescription("Number of items scraped: " + count);
             for (let index = 0; index < count; index++) {
                     scrapeEmbed.addField('Item:', words[index].name);
-                    scrapeEmbed.addField('Avg Price:', word[index].avg);
+                    scrapeEmbed.addField('Avg Price:', words[index].avg);
                 }
             scrapeEmbed.setTimestamp();
             scrapeEmbed.setFooter('Command currently being developed', 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=');
