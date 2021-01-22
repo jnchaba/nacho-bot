@@ -30,13 +30,25 @@
 <ul>
 <li> Funny memes </li>
 </ul>
+
+Escape from Tarkov
 <ul>
 <li> Displays maps for Escape From Tarkov, in discord </li>
 </ul>
 
 ![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/nachoeft.png?raw=true)
 
+<ul>
+<li> Displays hideout information for optimal hideout progression </li>
+<li> Displays quest information showing all items neccessary for quests </li>
+</ul>
 
+
+
+World of Warcraft Commands
+<ul>
+ <li> Command for individual classes directing to icy veins guides </li>
+</ul>
 </p>
 <h3> Planned Features </h3>
 <p>
