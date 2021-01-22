@@ -14,7 +14,7 @@ for (const file of commandFiles) {
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    console.log(scrape);
+    scrape.scrape();
     client.user.setActivity('!nachohelp', {type: "WATCHING" });
 });
 
