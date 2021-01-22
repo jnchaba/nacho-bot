@@ -4,3 +4,6 @@
 # JSON config Files
 config.json
 servers.json
+
+#directories
+/nacho-bot/node_modules/puppeteer/*
