@@ -21,7 +21,7 @@ module.exports = {
                 }
             scrapeEmbed.setTimestamp();
             scrapeEmbed.setFooter('Command currently being developed', 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=');
-            message.channel.send(scrapeEmbed);
+            message.channel.send(scrapEmbed);
         }
         if (args[0] === "customs") {
             message.channel.send(new MessageAttachment("./images/customs_map.png"));
