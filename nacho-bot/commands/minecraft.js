@@ -8,7 +8,7 @@ const server = {
 };
 
 const text = {
-            error: 'Error getting Minecraft server status...', // Check your terminal when you see this
+            error: 'Error getting Minecraft server status:', // Check your terminal when you see this
             online: '**Minecraft** server is **online**',
             players: '**{online}** people are playing!', // {online} will show player count
             noPlayers: 'Nobody is playing'
@@ -42,6 +42,9 @@ module.exports = {
             message.channel.send(mcstatusEmbed);
         })
         .catch( err => {
+            if (err === "undefined") {
+                err = "Server is Offline";
+            }
             const mcstatusErrorEmbed = new Discord.MessageEmbed()
             .setColor('#ff0000')
             .setTitle('Aw... shit')
