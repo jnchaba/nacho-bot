@@ -1,4 +1,5 @@
 const fs = require('fs');
+var scrape = require('./scripts/scrape.js');
 const { prefix, token } = require('./config.json');
 
 const Discord = require('discord.js');
@@ -13,6 +14,7 @@ for (const file of commandFiles) {
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    console.log(scrape);
     client.user.setActivity('!nachohelp', {type: "WATCHING" });
 });
 
