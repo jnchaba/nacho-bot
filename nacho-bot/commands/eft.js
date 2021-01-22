@@ -7,7 +7,7 @@ module.exports = {
     description:'eft',
     execute(message, args) {
         if (args[0] === "scrape") {
-            var data = fs.readFileSync('../marketdata.json', 'utf-8');
+            var data = fs.readFileSync('./marketdata.json', 'utf-8');
             var words = JSON.parse(data);
             var count = Object.keys(words).length;
             const scrapeEmbed = new Discord.MessageEmbed()
