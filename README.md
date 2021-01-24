@@ -68,6 +68,7 @@ Teamfight Tactics
 <ul>
  <li> Fetching Summoner Data </li>
  <li> Fetching Match Data </li>
+</ul>
 Administration Utilities
 <ul>
 <li> Kicking users </li>
