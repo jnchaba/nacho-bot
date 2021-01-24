@@ -59,7 +59,15 @@ Administration Utilities
 </ul>
 <h3> Planned Features </h3>
 <p>
- 
+League of Legends
+<ul>
+ <li> Fetching Summoner Data </li>
+ <li> Fetching Match Data </li>
+</ul>
+Teamfight Tactics
+<ul>
+ <li> Fetching Summoner Data </li>
+ <li> Fetching Match Data </li>
 Administration Utilities
 <ul>
 <li> Kicking users </li>
