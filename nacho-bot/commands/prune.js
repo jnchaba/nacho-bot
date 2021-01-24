@@ -6,7 +6,7 @@ module.exports = {
     description: 'delete old stuff',
     execute(message, args) {
         //check user has admin privs
-        if (!utils.checkUserAdmin(message.author)) {
+        if (!utils.checkUserAdmin(message)) {
             //Display a message saying they don't have rights
             const errorEmbed = new MessageEmbed()
                 .setColor('#ff0000')
@@ -43,7 +43,6 @@ module.exports = {
             messages.forEach(message => {
                 total_msgs++;
                 if (message.createdTimestamp < daysOld) {
-                    console.log(`${message.createdTimestamp} < ${daysOld}`);
                     filtered_msgs++;
                     message.delete();
                 }
