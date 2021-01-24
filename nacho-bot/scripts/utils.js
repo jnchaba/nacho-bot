@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 async function getMessagesBulk(channel, limit = 500) {
     const sum_messages = [];
     let last_id;
@@ -38,6 +40,12 @@ function checkUserAdmin(message) {
     return isvalid;
 }
 
+function getFileUpdatedDate(path) {
+    const status = fs.statSync(path);
+    return status.mtime.toLocaleString();
+}
+
 
 module.exports.getMessagesBulk = getMessagesBulk;
 module.exports.checkUserAdmin = checkUserAdmin;
+module.exports.getFileUpdatedDate = getFileUpdatedDate;

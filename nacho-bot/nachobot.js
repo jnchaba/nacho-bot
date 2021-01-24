@@ -3,6 +3,7 @@ var scrape = require('./scripts/scrape.js');
 const { prefix, token } = require('./config.json');
 
 const Discord = require('discord.js');
+const { timeStamp } = require('console');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -14,7 +15,6 @@ for (const file of commandFiles) {
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    scrape.scrape();
     client.user.setActivity('!nachohelp', {type: "WATCHING" });
 });
 
@@ -42,5 +42,18 @@ client.on('message', message => {
         message.reply(errorEmbed);
     }
 });
+
+let now = new Date();
+let day;
+
+var interval = setInterval(function(){
+    now = new Date();
+    if (day != now.getDay()) {
+        scrape.scrape();
+        day = now.getDay();
+    } else {
+        console.log('Already Scraped Today!');
+    }
+}, 10000);
 
 client.login(token);
