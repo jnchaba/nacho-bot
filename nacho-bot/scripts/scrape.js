@@ -16,8 +16,7 @@ var methods = {
                     let rowList = [];
                     let rows = document.querySelectorAll('table tr');
                     rows.forEach(row => {
-                        let record = {'picture' : '','name' : '','avg' : '',
-                        'dchange' : '','wchange' : ''};
+                        let record = {};
                         const tdList = Array.from(row.querySelectorAll('td'), column => column.innerText);
                         record.picture = tdList[0];
                         record.name = tdList[1];
@@ -29,10 +28,6 @@ var methods = {
                     }
                 });
                 return rowList;
-                // return Array.from(rows, row => {
-                //     const columns = row.querySelectorAll('td');
-                //     return Array.from(columns, column => column.innerText);
-                // });
                 });
                 fs.writeFile('./marketdata.json', JSON.stringify(data), err => {
                 if (err) throw err;

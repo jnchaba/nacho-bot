@@ -1,6 +1,7 @@
 const { MessageAttachment } = require('discord.js');
 const Discord = require('discord.js');
 const fs = require('fs');
+const utils = require('../scripts/utils');
 
 module.exports = {
     name:'eft',
@@ -28,6 +29,7 @@ module.exports = {
         switch(args[0]) {
             case "scrape":
                 var data = fs.readFileSync('./marketdata.json', 'utf-8');
+                var mdate = utils.getFileUpdatedDate('./marketdata.json');
                 var words = JSON.parse(data);
                 var count = Object.keys(words).length;
                 const scrapeEmbed = new Discord.MessageEmbed()
@@ -44,8 +46,9 @@ module.exports = {
                     scrapeEmbed.addField(name, price, true);
                 }
                 scrapeEmbed.setTimestamp();
-                scrapeEmbed.setFooter('Command currently being developed', 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=');
+                scrapeEmbed.setFooter('Data scraped on: ' + mdate, 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=');
                 response.send(scrapeEmbed);
+                responded = true;
                 break;
             case "hideout":
                 response.send(new MessageAttachment("./images/hideout.png"));
