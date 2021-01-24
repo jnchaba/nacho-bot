@@ -51,12 +51,17 @@ World of Warcraft Commands
  <li> Command for individual classes directing to icy veins guides </li>
 </ul>
 </p>
-<h3> Planned Features </h3>
-<p>
+
 Administration Utilities
 <ul>
-<li> Pruning messages older than X amount of time </li>
+ <li> Pruning messages older than X amount of time </li>
 <li> Moving users across voice channels </li>
+</ul>
+<h3> Planned Features </h3>
+<p>
+ 
+Administration Utilities
+<ul>
 <li> Kicking users </li>
 </ul>
 Social Utilities
