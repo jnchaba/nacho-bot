@@ -1,11 +1,12 @@
 const { Guild, MessageEmbed } = require('discord.js');
+const utils = require('../scripts/utils');
 
 module.exports = {
     name: 'banish',
     description: 'banish a user to the shadow realm (or another voice channel)',
     execute(message, args) {
         //check user has admin privs
-        if (!utils.checkUserAdmin(message.author)) {
+        if (!utils.checkUserAdmin(message)) {
             //Display a message saying they don't have rights
             const errorEmbed = new MessageEmbed()
                 .setColor('#ff0000')
@@ -29,7 +30,7 @@ module.exports = {
         if (args[0] !== undefined) {
             userid = args[0].replace("<@!","").replace(">","");
         }
-        console.log(args.length);
+
         for (let i = 1; i < args.length; i++) {
             channelname += args[i];
             if (i < args.length - 1) {
@@ -61,8 +62,6 @@ module.exports = {
         //get the channel object based on the channel arg
         message.client.channels.cache.forEach(channel => {
             if (channel.type === "voice") {
-                console.log(channel.name.toLowerCase());
-                console.log(channelname.toLowerCase());
                 if (channel.name.toLowerCase() === channelname.toLowerCase()) {
                     targetChannel = channel;
                 }
@@ -91,7 +90,6 @@ module.exports = {
                 .setTimestamp()
                 .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
             message.reply(errorEmbed);
-            console.log("Node NOT Exiting...");
             return;
         });
 
