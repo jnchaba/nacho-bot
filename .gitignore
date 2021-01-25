@@ -7,3 +7,4 @@ servers.json
 
 #directories
 /nacho-bot/node_modules/*
+/nacho-bot/marketdata.json
