@@ -52,6 +52,15 @@ World of Warcraft Commands
 </ul>
 </p>
 
+League of Legends
+<ul>
+ <li> Fetching Summoner Data </li>
+</ul>
+Teamfight Tactics
+<ul>
+ <li> Fetching Summoner Data </li>
+</ul>
+
 Administration Utilities
 <ul>
  <li> Pruning messages older than X amount of time </li>
@@ -61,17 +70,15 @@ Administration Utilities
 <p>
 League of Legends
 <ul>
- <li> Fetching Summoner Data </li>
  <li> Fetching Match Data </li>
 </ul>
 Teamfight Tactics
 <ul>
- <li> Fetching Summoner Data </li>
  <li> Fetching Match Data </li>
 </ul>
 Administration Utilities
 <ul>
-<li> Kicking users </li>
+<li> Done, for now. </li>
 </ul>
 Social Utilities
 <ul>
