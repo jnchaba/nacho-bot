@@ -162,7 +162,7 @@ async function main(message, args) {
     }
     for (const key in rankedData) {
         if (rankedData[key].queueType == solo) {
-            rank = rankedData[key].rank + ' ' + rankedData[key].tier;
+            rank = rankedData[key].tier + ' ' + rankedData[key].rank;
             wins = rankedData[key].wins;
             losses = rankedData[key].losses;
             total = wins + losses;
@@ -187,7 +187,7 @@ async function main(message, args) {
             }
         }
         if (rankedData[key].queueType == flex) {
-            rank = rankedData[key].rank + ' ' + rankedData[key].tier;
+            rank = rankedData[key].tier + ' ' + rankedData[key].rank;
             wins = rankedData[key].wins;
             losses = rankedData[key].losses;
             total = wins + losses;
