@@ -91,7 +91,21 @@ function getRankedData(summonerId) {
 }
 
 async function main(message, args) {
-    if (args.length == 0) {
+    var argv = 0;
+    var name = '';
+    while (argv < args.length) {
+        if (args[argv] != 'solo' && args[argv] != 'flex') {
+            name += args[argv];
+            argv++;
+        } else {
+            break;
+        }
+    }
+    console.log("# args.length :" + args.length);
+    console.log("# argv :" + argv);
+    console.log("# arguments for noqueue :" + (argv + 1));
+    console.log("comparing : " + (args.length + argv) + " and " + argv);
+    if (args.length == 0 ) {
         const errorEmbed = new Discord.MessageEmbed()
                 .setColor('#ff0000')
                 .setTitle('Gimmie a Name!')
@@ -103,7 +117,9 @@ async function main(message, args) {
             message.reply(errorEmbed);
             return;
     }
-    if (args.length == 1) {
+    name = name.trim();
+    console.log("comparing : " + (args.length + argv) + " and " + ( 2 + argv));
+    if (args[args.length - 1] != 'solo' && args[args.length - 1] != 'flex') {
         const errorEmbed = new Discord.MessageEmbed()
                 .setColor('#ff0000')
                 .setTitle('Gimmie a Queue!')
@@ -116,7 +132,7 @@ async function main(message, args) {
             return;
     }
     const response = message.channel;
-    var name = args[0];
+    
     const sumData = await getSummonerMetrics(name);
     var summonerName = sumData.name;
     var summonerLevel = sumData.summonerLevel;
@@ -124,7 +140,6 @@ async function main(message, args) {
     //const champData = await getMasteryData(sumData.id);
     const rankedData = await getRankedData(sumData.id);
     var rank;
-    var tier;
     var wins;
     var losses;
     var total;
@@ -151,7 +166,7 @@ async function main(message, args) {
             wins = rankedData[key].wins;
             losses = rankedData[key].losses;
             total = wins + losses;
-            winrate = (wins / total) * 100;
+            winrate = Math.round((wins / total) * 100, 2);
             const lolSoloEmbed = new Discord.MessageEmbed()
                 .setColor('#C6AD64')
                 .setTitle('League of Legends Solo/Duo Stats')
@@ -166,7 +181,7 @@ async function main(message, args) {
                 .setThumbnail('http://ddragon.leagueoflegends.com/cdn/10.23.1/img/profileicon/' + icons[summonerIcon])
                 .setTimestamp()
                 .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
-            if (args[1] === 'solo') {
+            if (args[args.length - 1] === 'solo') {
                 message.reply(lolSoloEmbed);
                 return;
             }
@@ -191,7 +206,7 @@ async function main(message, args) {
                 .setThumbnail('http://ddragon.leagueoflegends.com/cdn/10.23.1/img/profileicon/' + icons[summonerIcon])
                 .setTimestamp()
                 .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
-            if (args[1] === 'flex') {
+            if (args[args.length - 1] === 'flex') {
                 message.reply(lolFlexEmbed);
                 return;
             }
