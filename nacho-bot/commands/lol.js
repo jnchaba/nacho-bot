@@ -191,7 +191,7 @@ async function main(message, args) {
             wins = rankedData[key].wins;
             losses = rankedData[key].losses;
             total = wins + losses;
-            winrate = (wins / total) * 100;
+            winrate = Math.round((wins / total) * 100, 2);
             const lolFlexEmbed = new Discord.MessageEmbed()
                 .setColor('#C6AD64')
                 .setTitle('League of Legends Flex Stats')
