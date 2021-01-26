@@ -1,7 +1,7 @@
 const TeemoJS = require('teemojs');
 const request = require('request');
-const { prefix, token, rgapi } = require('./config.json');
-let api = TeemoJS(rgapi);
+const { prefix, token, mikesRiotAPIKey } = require('../config.json');
+let api = TeemoJS(mikesRiotAPIKey);
 
 const champs = {};
 const icons = {};
