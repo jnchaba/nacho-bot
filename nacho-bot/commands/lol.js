@@ -1,14 +1,15 @@
 const TeemoJS = require('teemojs');
 const request = require('request');
-const { prefix, token, mikesRiotAPIKey } = require('../config.json');
-let api = TeemoJS(mikesRiotAPIKey);
+const Discord = require('discord.js');
+const { prefix, token, rgapi } = require('../config.json');
+let api = TeemoJS(rgapi);
 
 const champs = {};
 const icons = {};
 const matchIds = [];
 const champIds = [];
-
-// method call example in index.js
+const solo = 'RANKED_SOLO_5x5';
+const flex = 'RANKED_FLEX_SR';
 
 request({
     url: 'http://ddragon.leagueoflegends.com/cdn/10.23.1/data/en_US/championFull.json',
@@ -65,46 +66,146 @@ function getMatchData(matchID) {
     });
 }
 
+function getMasteryData(summonerId) {
+    return new Promise((resolve, reject) => {
+        api.get('na1', 'championMastery.getAllChampionMasteries', summonerId)
+            .then(data => {
+                resolve(data);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+}
+
+function getRankedData(summonerId) {
+    return new Promise((resolve, reject) => {
+        api.get('na1', 'league.getLeagueEntriesForSummoner', summonerId)
+            .then(data => {
+                resolve(data);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+}
+
+async function main(message, args) {
+    if (args.length == 0) {
+        const errorEmbed = new Discord.MessageEmbed()
+                .setColor('#ff0000')
+                .setTitle('Gimmie a Name!')
+                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
+                .setDescription("You forgot to give me a summoner name!")
+                .setThumbnail('https://cdn2.iconfinder.com/data/icons/picons-basic-2/57/basic2-189_bug-512.png')
+                .setTimestamp()
+                .setFooter('this fuckin guy', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Glazed-Donut.jpg/1280px-Glazed-Donut.jpg');
+            message.reply(errorEmbed);
+            return;
+    }
+    if (args.length == 1) {
+        const errorEmbed = new Discord.MessageEmbed()
+                .setColor('#ff0000')
+                .setTitle('Gimmie a Queue!')
+                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
+                .setDescription("You forgot to specify what queue you want stats for!")
+                .setThumbnail('https://cdn2.iconfinder.com/data/icons/picons-basic-2/57/basic2-189_bug-512.png')
+                .setTimestamp()
+                .setFooter('this fuckin guy', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Glazed-Donut.jpg/1280px-Glazed-Donut.jpg');
+            message.reply(errorEmbed);
+            return;
+    }
+    const response = message.channel;
+    var name = args[0];
+    const sumData = await getSummonerMetrics(name);
+    var summonerName = sumData.name;
+    var summonerLevel = sumData.summonerLevel;
+    var summonerIcon = sumData.profileIconId;
+    //const champData = await getMasteryData(sumData.id);
+    const rankedData = await getRankedData(sumData.id);
+    var rank;
+    var tier;
+    var wins;
+    var losses;
+    var total;
+    var winrate;
+    console.log(rankedData);
+    if (rankedData.length === 0) {
+        const norankEmbed = new Discord.MessageEmbed()
+            .setColor('#C6AD64')
+            .setTitle('League of Legends Solo/Duo Stats')
+            .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
+            .addField('Summoner Name: ', summonerName, false)
+            .addField('Summoner Level: ', summonerLevel, false)
+            .addField('Rank: ', '**Unranked**', false)
+            .addField('Total Ranked Games Played: ', '**None**', false)
+            .setThumbnail('http://ddragon.leagueoflegends.com/cdn/10.23.1/img/profileicon/' + icons[summonerIcon])
+            .setTimestamp()
+            .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
+        message.reply(norankEmbed);
+        return;
+    }
+    for (const key in rankedData) {
+        if (rankedData[key].queueType == solo) {
+            rank = rankedData[key].rank + ' ' + rankedData[key].tier;
+            wins = rankedData[key].wins;
+            losses = rankedData[key].losses;
+            total = wins + losses;
+            winrate = (wins / total) * 100;
+            const lolSoloEmbed = new Discord.MessageEmbed()
+                .setColor('#C6AD64')
+                .setTitle('League of Legends Solo/Duo Stats')
+                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
+                .addField('Summoner Name: ', summonerName, false)
+                .addField('Summoner Level: ', summonerLevel, false)
+                .addField('Rank: ', rank, false)
+                .addField('Total Ranked Games Played: ', total, false)
+                .addField('Wins: ', wins, false)
+                .addField('Losses: ', losses, false)
+                .addField('Winrate: ', winrate + '%', false)
+                .setThumbnail('http://ddragon.leagueoflegends.com/cdn/10.23.1/img/profileicon/' + icons[summonerIcon])
+                .setTimestamp()
+                .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
+            if (args[1] === 'solo') {
+                message.reply(lolSoloEmbed);
+                return;
+            }
+        }
+        if (rankedData[key].queueType == flex) {
+            rank = rankedData[key].rank + ' ' + rankedData[key].tier;
+            wins = rankedData[key].wins;
+            losses = rankedData[key].losses;
+            total = wins + losses;
+            winrate = (wins / total) * 100;
+            const lolFlexEmbed = new Discord.MessageEmbed()
+                .setColor('#C6AD64')
+                .setTitle('League of Legends Flex Stats')
+                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
+                .addField('Summoner Name: ', summonerName, false)
+                .addField('Summoner Level: ', summonerLevel, false)
+                .addField('Rank: ', rank, false)
+                .addField('Total Ranked Games Played: ', total, false)
+                .addField('Wins: ', wins, false)
+                .addField('Losses: ', losses, false)
+                .addField('Winrate: ', winrate + '%', false)
+                .setThumbnail('http://ddragon.leagueoflegends.com/cdn/10.23.1/img/profileicon/' + icons[summonerIcon])
+                .setTimestamp()
+                .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
+            if (args[1] === 'flex') {
+                message.reply(lolFlexEmbed);
+                return;
+            }
+        }
+    }
+    
+}
+
 module.exports = {
     name: 'lol',
     cooldown: 3,
     description: 'Fetches league data',
-    run: async (command) => {
-        const sumData = await getSummonerMetrics(command);
-
-        console.log(sumData);
-
-        const sumMatches = await getSummonerMatches(sumData.accountId);
-
-        var wins = 0;
-        var losses = 0;
-        var total = 0;
-        var winrate = 0.00;
-
-        for (const gameId in sumMatches.matches) {
-            matchIds[gameId] = sumMatches.matches[gameId].gameId;
-            champIds[gameId] = sumMatches.matches[gameId].champion;
-        }
-        // console.log("Sumdata.name: " + sumData.name);
-        // console.log("# matches: " + matchIds.length);
-        // console.log("# champs: " + champIds.length);
-        // console.log("sumdata.id: " + sumData.id);
-
-        for (const gameId in matchIds) {
-            const matchData = await getMatchData(matchIds[gameId]);
-            for (const player in matchData.participants) {
-                if (matchData.participants[player].championId == champIds[gameId]) {
-                    if (matchData.participants[player].stats.win == true){
-                        wins++;
-                    } else {
-                        losses++;
-                    }
-                    total = wins + losses;
-                    console.log("Total games analyzed: " + total);
-                }
-            }
-        }
-        winrate = (wins / total) * 100;
-        console.log(sumData.name + ": winrate = " + winrate + "%");
+    execute(message, args){
+        console.log("init lol");
+        main(message, args).then();
     }
 }
