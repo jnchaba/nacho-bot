@@ -71,7 +71,7 @@ Teamfight Tactics
 </ul>
 Administration Utilities
 <ul>
-<li> Kicking users </li>
+<li> Done, for now. </li>
 </ul>
 Social Utilities
 <ul>
