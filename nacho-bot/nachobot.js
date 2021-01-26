@@ -55,7 +55,7 @@ var interval = setInterval(function(){
         logged = false;
     } else {
         if (!logged) {
-            console.log('Already Scraped Today!');
+            //console.log('Already Scraped Today!');
             logged = true;
         }
     }

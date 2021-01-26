@@ -31,9 +31,7 @@ var methods = {
                 });
                 fs.writeFile('./marketdata.json', JSON.stringify(data), err => {
                 if (err) throw err;
-                console.log("Done writing");
             });
-            console.log(data);
             await browser.close ();
             })
             //handling any errors
