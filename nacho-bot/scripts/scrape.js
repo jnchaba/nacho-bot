@@ -1,18 +1,18 @@
-const puppeteer = require ('puppeteer');
+const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 var methods = {
-    scrape: function() {
+    scrape: function () {
         //initiating Puppeteer
-        puppeteer.launch ()
-            .then (async browser => {
+        puppeteer.launch()
+            .then(async browser => {
 
                 //opening a new page and navigating to Reddit
-                const page = await browser.newPage ();
-                await page.goto ('https://tarkov-market.com');
+                const page = await browser.newPage();
+                await page.goto('https://tarkov-market.com');
                 await page.waitForSelector('table');
                 //manipulating the page's content
-                let data = await page.evaluate (() => {
+                let data = await page.evaluate(() => {
                     let rowList = [];
                     let rows = document.querySelectorAll('table tr');
                     rows.forEach(row => {
@@ -24,21 +24,22 @@ var methods = {
                         record.dchange = tdList[3];
                         record.wchange = tdList[4];
                         if (tdList.length >= 4) {
-                        rowList.push(record);
-                    }
-                });
-                return rowList;
+                            rowList.push(record);
+                        }
+                    });
+                    return rowList;
                 });
                 fs.writeFile('./marketdata.json', JSON.stringify(data), err => {
-                if (err) throw err;
-            });
-            await browser.close ();
+                    if (err) throw err;
+                    console.log("Done writing");
+                });
+                await browser.close();
             })
             //handling any errors
-            .catch (function (err) {
-                console.error (err);
+            .catch(function (err) {
+                console.error(err);
             });
-        }
+    }
 };
 
 module.exports = methods;
