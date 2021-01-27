@@ -23,7 +23,14 @@ async function main(message, args) {
         message.reply(errorEmbed);
         return;
     }
-    const summonerName = args[0];
+
+    let summonerName = "";
+    for (let i = 0; i < args.length; i++) {
+        summonerName += args[i];
+        if (i < args.length - 1) {
+            summonerName += " ";
+        }
+    }
     
     const summoner = await getSummonerData(summonerName);
 
