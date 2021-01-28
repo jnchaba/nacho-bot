@@ -14,8 +14,9 @@ function getMatchData(matchID) {
     return api.get('na1', 'match.getMatch', matchID);
 }
 
-function getMatchListData(summonerId, champId) {
-    return api.get('na1', 'match.getMatchlist', summonerId, { champion: champId, endIndex: 40 });
+function getMatchListData(accountID, champId) {
+    console.log(champId);
+    return api.get('na1', 'match.getMatchlist', accountID, { champion: champId, endIndex: 10 });
 }
 
 function getMasteryData(summonerId) {
@@ -26,6 +27,10 @@ function getRankedData(summonerId) {
     return api.get('na1', 'league.getLeagueEntriesForSummoner', summonerId);
 }
 
+function getActiveGameData(summonerId) {
+    return api.get('na1', 'spectator.getCurrentGameInfoBySummoner', summonerId);
+}
+
 const lolApiUtil = {
     getSummonerMetrics: getSummonerMetrics,
     getSummonerMatches: getSummonerMatches,
@@ -33,6 +38,7 @@ const lolApiUtil = {
     getMatchListData: getMatchListData,
     getMasteryData: getMasteryData,
     getRankedData: getRankedData,
+    getActiveGameData: getActiveGameData,
 };
 
 module.exports.lolApiUtil = lolApiUtil;

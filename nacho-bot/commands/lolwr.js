@@ -33,118 +33,118 @@ request({
 
 async function main(message, args) {
     console.log(args);
-    if(args[0] != undefined) {
+    if (args[0] != undefined) {
         const msg = await message.channel.send('Fetching LoL Data...');
-    try {
-        var name = '';
-        for (let i = 0; i < args.length; i++) {
-            name += args[i];
-            if (i < args.length - 1) {
-                name += " ";
+        try {
+            var name = '';
+            for (let i = 0; i < args.length; i++) {
+                name += args[i];
+                if (i < args.length - 1) {
+                    name += " ";
+                }
             }
-        }
-        const sumData = await lolApiUtil.getSummonerData(name);
-        const champData = await lolApiUtil.getMasteryData(sumData.id);
-        const rankData = await lolApiUtil.getRankedData(sumData.id);
-        const gameData = await lolApiUtil.getActiveGameData(sumData.id);
+            const sumData = await lolApiUtil.getSummonerMetrics(name);
+            let champData = (await lolApiUtil.getMasteryData(sumData.id)).slice(0, 3);
+            const rankData = await lolApiUtil.getRankedData(sumData.id);
+            
+            const wins = [];
+            const games = [];
+            const levels = [];
+            let totalGames = 0;
 
-        const gameIds = [];
-        let matchListData = null;
-        let champId = 0;
-        const wins = [];
+            for (champ of champData) {
+                let curWins = 0;
+                let curGames = 0;
+                let curLevels = 0;
 
-        wins[0] = 0;
-        wins[1] = 0;
-        wins[2] = 0;
-        const games = [];
-        games[0] = 0;
-        games[1] = 0;
-        games[2] = 0;
-        const levels = [];
-        levels[0] = 0;
-        levels[1] = 0;
-        levels[2] = 0;
-        for (let i = 0; i < 3; i++) {
-            champId = champData[i].championId;
-            matchListData = await getMatchListData(sumData.accountId, champId);
-            for(const gId in matchListData.matches) {
-                gameIds[gId] = matchListData.matches[gId].gameId;
-            }
-
-            for(const id in gameIds) {
-                const matchData = await getMatchData(gameIds[id]);
-                for(const player in matchData.participants) {
-                    if(matchData.participants[player].championId == champId) {
-                        if(matchData.participants[player].stats.win == true) {
-                            wins[i] += 1;
+                const matchListDataResponse = await lolApiUtil.getMatchListData(sumData.accountId, champ.championId);
+                for (matchHeader of matchListDataResponse.matches) {
+                    const matchDataResponse = await lolApiUtil.getMatchData(matchHeader.gameId);
+                    for (participant of matchDataResponse.participants) {
+                        if (participant.championId == champ.championId) {
+                            if (participant.stats.win) {
+                                curWins++;
+                            }
+                            totalGames++;
+                            curGames++;
+                            curLevels += participant.stats.champLevel;
                         }
-                        games[i] += 1;
-                        levels[i] += matchData.participants[player].stats.champLevel;
                     }
                 }
+
+                wins.push(curWins);
+                games.push(curGames);
+                levels.push(curLevels);
             }
-        }
 
-        console.log("totals: " + games[0] + " | " + games[1] + " | " + games[2]);
-        console.log("levels: "+ levels[0] + " | " + levels[1] + " | " + levels[2]);
-        let total = games[0] + games[1] + games[2];
+            const profileEmbed = new Discord.MessageEmbed()
+                .setTitle(sumData.name + '\'s win-rate for Top 3 Mastery champions, over past ' + totalGames + ' games!')
+                .setThumbnail('http://ddragon.leagueoflegends.com/cdn/10.16.1/img/profileicon/' + icons[sumData.profileIconId])
+                .setTimestamp()
+                .setFooter('Called by ' + message.author.username, message.author.avatarURL());
 
-        const profileEmbed = new Discord.MessageEmbed()
-            .setTitle(sumData.name + '\'s win-rate for Top 3 Mastery champions, over past ' + total + ' games!')
-            .setThumbnail('http://ddragon.leagueoflegends.com/cdn/10.16.1/img/profileicon/' + icons[sumData.profileIconId])
-            .setTimestamp()
-            .setFooter('Called by ' + message.author.username, message.author.avatarURL());
-
-        if(rankData[0] != undefined) {
-            for(const key in rankData) {
-                if(rankData[key].queueType == 'RANKED_SOLO_5x5') {
-                    profileEmbed.addField('Rank:', rankData[key].tier + ' ' + rankData[key].rank, true);
-                    break;
+            let isRanked = false;
+            rankData.forEach(rankItem => {
+                if (rankItem == 'RANKED_SOLO_5x5') {
+                    isRanked = true;
+                    profileEmbed.addField('Rank:', rankItem.tier + ' ' + rankItem.rank, true);
                 }
-            }
-        } else {
-            profileEmbed.addField('Level:', sumData.summonerLevel, true);
-        }
-
-        profileEmbed.addFields(
-            { name: '\u200B', value: '\u200B' },
-            { name: champs[champData[0].championId] + ' - M' + champData[0].championLevel, value: 'Points: ' + champData[0].championPoints.toLocaleString(), inline: true },
-            { name: champs[champData[1].championId] + ' - M' + champData[1].championLevel, value: 'Points: ' + champData[1].championPoints.toLocaleString(), inline: true },
-            { name: champs[champData[2].championId] + ' - M' + champData[2].championLevel, value: 'Points: ' + champData[2].championPoints.toLocaleString(), inline: true },
-        );
-        x
-        for (let i = 0; i < 3; i++) {
-            profileEmbed.addFields(
-                { name: '**Win Rate:** ', value: `${(Math.round(1000 * ((wins[i] / games[i]) * 100)) / 1000)}%`, inline: true },
-            );
-        }
-        for (let i = 0; i < 3; i++) {
-            let avglevel = levels[i] / 10;
-            profileEmbed.addFields(
-                { name: 'Avg Level:', value: `${avglevel}`, inline: true });
-        }
-
-        message.delete({ timeout: 100 });
-        msg.delete({ timeout: 100 });
-        message.channel.send(profileEmbed);
-    } catch(error) {
-        message.delete({ timeout: 100 });
-        msg.edit('Failed to get Lol Data...')
-            .then(messageEdit => {
-                messageEdit.delete({ timeout: 3000 });
             });
+            
+            if (!isRanked)    {
+                profileEmbed.addField('Level:', sumData.summonerLevel, true);
+            }
+
+            profileEmbed.addFields(
+                { name: '\u200B', value: '\u200B' }, //\u200B is a zero width space, for formatting
+            )
+            
+            for (let i = 0; i < 3; i++) {
+                profileEmbed.addFields({ 
+                    name: champs[champData[i].championId] + ' - M' + champData[i].championLevel, 
+                    value: 'Points: ' + champData[i].championPoints.toLocaleString(),
+                    inline: true 
+                });
+            }
+            
+            for (let i = 0; i < 3; i++) {
+                profileEmbed.addFields({ 
+                    name: '**Win Rate:** ', 
+                    value: `${(Math.round(1000 * ((wins[i] / games[i]) * 100)) / 1000)}%`, 
+                    inline: true 
+                });
+            }
+            for (let i = 0; i < 3; i++) {
+                let avglevel = levels[i] / 10;
+                profileEmbed.addFields({ 
+                    name: 'Avg Level:', 
+                    value: `${avglevel}`, 
+                    inline: true
+                });
+            }
+
+            message.delete({ timeout: 100 });
+            msg.delete({ timeout: 100 });
+            message.channel.send(profileEmbed);
+        } catch (error) {
+            console.log(error);
+            message.delete({ timeout: 100 });
+            msg.edit('Failed to get Lol Data...')
+                .then(messageEdit => {
+                    messageEdit.delete({ timeout: 3000 });
+                });
         }
     } else {
         message.channel.send('**Invaild usage!** Reason: You must give a vaild summoner name! \n**Vaild usage:** !lolchamp {summoner name}');
     }
-    
+
 }
 
 module.exports = {
     name: 'lolwr',
     cooldown: 3,
     description: 'Fetches league data',
-    execute(message, args){
+    execute(message, args) {
         console.log("init lol");
         main(message, args).then();
     }
