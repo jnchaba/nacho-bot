@@ -19,6 +19,14 @@ module.exports = {
             return;
         });
 
+        if (args.length == 0) {
+            errorUtil.error(message, {
+                title: "Missing arguments",
+                description: "format: !eft scrape or !eft mapname or !eft hideout/quest",
+            });
+            return;
+        }
+
         switch(args[0]) {
             case "scrape":
                 var data = fs.readFileSync('./marketdata.json', 'utf-8');
