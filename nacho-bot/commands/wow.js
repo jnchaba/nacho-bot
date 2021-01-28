@@ -1,5 +1,6 @@
 const { MessageAttachment } = require('discord.js');
 const Discord = require('discord.js');
+const { errorUtil } = require('../scripts/errorUtil');
 
 // Function for generating responses for each class argument
 function response(color, title, description, thumbnail) {
@@ -16,64 +17,58 @@ function response(color, title, description, thumbnail) {
 }
 
 module.exports = {
-    name:'wow',
-    description:'wow',
+    name: 'wow',
+    description: 'wow',
     execute(message, args) {
         if (args[0] === "help") {
             const helpEmbed = new Discord.MessageEmbed()
-                            .setColor('#A5571F')
-                            .setTitle('WoW Command Help')
-                            .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
-                            .setDescription("Usage:")
-                            .setThumbnail('http://www.iamhermitthecrab.com/wp-content/uploads/2016/09/wow.png')
-                            .addFields(
-                                { name: 'Druid Specs', value: '!wow druid balance/feral/resto/guardian' },
-                                { name: 'Death Knight Specs', value: '!wow dk unholy/frost/blood' },
-                                { name: 'Demon Hunter Specs', value: '!wow dh havoc/vengeance' },
-                                { name: 'Hunter Specs', value: '!wow hunter bm/marksmanship/survival' },
-                                { name: 'Mage Specs', value: '!wow mage arcane/fire/frost' },
-                                { name: 'Warlock Specs', value: '!wow lock afflication/destruction/demonology' },
-                                { name: 'Monk Specs', value: '!wow monk brew/mist/wind' },
-                                { name: 'Priest Specs', value: '!wow priest discipline/holy/shadow' },
-                                { name: 'Paladin Specs', value: '!wow pally holy/retribution/protection' },
-                                { name: 'Rogue Specs', value: '!wow rogue assassin/outlaw/subtlety' },
-                                { name: 'Shaman Specs', value: '!wow shaman elemental/enhancement/restoration' },
-                                { name: 'Warrior Specs', value: '!wow warrior arms/fury/protection' },
-                                { name: 'Note', value: 'If you\'d like a command to be edited or shortened, dm <@194630142029594625>' }
-                            )
-                            .setImage('https://static.icy-veins.com/images/common/logo.png')
-                            .setTimestamp()
-                            .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
-                        message.reply(helpEmbed);
+                .setColor('#A5571F')
+                .setTitle('WoW Command Help')
+                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
+                .setDescription("Usage:")
+                .setThumbnail('http://www.iamhermitthecrab.com/wp-content/uploads/2016/09/wow.png')
+                .addFields(
+                    { name: 'Druid Specs', value: '!wow druid balance/feral/resto/guardian' },
+                    { name: 'Death Knight Specs', value: '!wow dk unholy/frost/blood' },
+                    { name: 'Demon Hunter Specs', value: '!wow dh havoc/vengeance' },
+                    { name: 'Hunter Specs', value: '!wow hunter bm/marksmanship/survival' },
+                    { name: 'Mage Specs', value: '!wow mage arcane/fire/frost' },
+                    { name: 'Warlock Specs', value: '!wow lock afflication/destruction/demonology' },
+                    { name: 'Monk Specs', value: '!wow monk brew/mist/wind' },
+                    { name: 'Priest Specs', value: '!wow priest discipline/holy/shadow' },
+                    { name: 'Paladin Specs', value: '!wow pally holy/retribution/protection' },
+                    { name: 'Rogue Specs', value: '!wow rogue assassin/outlaw/subtlety' },
+                    { name: 'Shaman Specs', value: '!wow shaman elemental/enhancement/restoration' },
+                    { name: 'Warrior Specs', value: '!wow warrior arms/fury/protection' },
+                    { name: 'Note', value: 'If you\'d like a command to be edited or shortened, dm <@194630142029594625>' }
+                )
+                .setImage('https://static.icy-veins.com/images/common/logo.png')
+                .setTimestamp()
+                .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
+            message.reply(helpEmbed);
         }
         else if (args.length < 2) {
-            const errorEmbed = new Discord.MessageEmbed()
-                    .setColor('#ff0000')
-                    .setTitle('Aw, shit...')
-                    .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
-                    .setDescription("Please use format !wow [class] [spec]")
-                    .setThumbnail('https://cdn2.iconfinder.com/data/icons/picons-basic-2/57/basic2-189_bug-512.png')
-                    .setImage('https://i.redd.it/jmo62jjnjg251.png')
-                    .setTimestamp()
-                    .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
-                message.reply(errorEmbed);
+            errorUtil.error(message, {
+                description: "Please use format !wow [class] [spec]",
+                noThumbnail: true
+            });
         }
-        switch(args[0]) {
+        switch (args[0]) {
             case "druid":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "balance":
                         const balanceEmbed = new response('#A5571F', 'Balance Druid', "https://www.icy-veins.com/wow/balance-druid-pve-dps-guide",
-                                                            'https://media-hearth.cursecdn.com/attachments/0/149/druid_22.png');
+                            'https://media-hearth.cursecdn.com/attachments/0/149/druid_22.png');
                         message.reply(balanceEmbed);
                         break;
                     case "feral":
                         const feralEmbed = new response('#A5571F', 'Feral Druid', "https://www.icy-veins.com/wow/feral-druid-pve-dps-guide",
-                                                            'https://media-hearth.cursecdn.com/attachments/0/149/druid_22.png');
+                            'https://media-hearth.cursecdn.com/attachments/0/149/druid_22.png');
                         message.reply(feralEmbed);
                         break;
                     case "resto":
                         const restoEmbed = new response('#A5571F', 'Resto Druid', "https://www.icy-veins.com/wow/restoration-druid-pve-healing-guide",
-                                                            'https://media-hearth.cursecdn.com/attachments/0/149/druid_22.png');
+                            'https://media-hearth.cursecdn.com/attachments/0/149/druid_22.png');
                         message.reply(restoEmbed);
                         break;
                     case "guardian":
@@ -84,7 +79,7 @@ module.exports = {
                 }
                 break;
             case "dk":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "unholy":
                         const unholyEmbed = new response('#CE375F', 'Unholy Death Knight', "https://www.icy-veins.com/wow/unholy-death-knight-pve-dps-guide",
                             'https://media-hearth.cursecdn.com/attachments/0/148/deathknight_15.png');
@@ -103,7 +98,7 @@ module.exports = {
                 }
                 break;
             case "dh":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "havoc":
                         const havocEmbed = new response('#A330C9', 'Havoc Demon Hunter', "https://www.icy-veins.com/wow/havoc-demon-hunter-pve-dps-guide",
                             'http://media.blizzard.com/wow/legion-6a153ad2/images/metamorphosis-icon.png');
@@ -117,7 +112,7 @@ module.exports = {
                 }
                 break;
             case "hunter":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "bm":
                         const bmEmbed = new response('#9BC075', 'Beast Mastery Hunter', "https://www.icy-veins.com/wow/beast-mastery-hunter-pve-dps-guide",
                             'https://img.rankedboost.com/wp-content/uploads/2019/05/WoW-Classic-Hunter-Guide.png');
@@ -136,7 +131,7 @@ module.exports = {
                 }
                 break;
             case "mage":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "arcane":
                         const arcaneEmbed = new response('#8BDEFB', 'Arcane Mage', "https://www.icy-veins.com/wow/arcane-mage-pve-dps-guide",
                             'https://img.rankedboost.com/wp-content/uploads/2019/05/WoW-Classic-Mage-Guide.png');
@@ -155,7 +150,7 @@ module.exports = {
                 }
                 break;
             case "lock":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "affliction":
                         const affEmbed = new response('#9860B7', 'Affliction Warlock', "https://www.icy-veins.com/wow/affliction-warlock-pve-dps-guide",
                             'https://media-hearth.cursecdn.com/attachments/0/156/warlock_21.png');
@@ -174,7 +169,7 @@ module.exports = {
                 }
                 break;
             case "monk":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "brew":
                         const brewEmbed = new response('#37A587', 'Brewmaster Monk', "https://www.icy-veins.com/wow/brewmaster-monk-pve-tank-guide",
                             'https://odealo.com/uploads/public/World%20of%20Warcraft/Monk/Monk_image.png');
@@ -193,7 +188,7 @@ module.exports = {
                 }
                 break;
             case "priest":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "discipline":
                         const disciplineEmbed = new response('#FFFFFD', 'Discipline Priest', "https://www.icy-veins.com/wow/discipline-priest-pve-healing-guide",
                             'https://img.rankedboost.com/wp-content/uploads/2019/05/WoW-Classic-Priest-Guide.png');
@@ -212,7 +207,7 @@ module.exports = {
                 }
                 break;
             case "pally":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "holy":
                         const holypEmbed = new response('#F292AC', 'Holy Paladin', "https://www.icy-veins.com/wow/holy-paladin-pve-healing-guide",
                             'https://img.rankedboost.com/wp-content/uploads/2019/05/WoW-Classic-Paladin-Guide.png');
@@ -231,7 +226,7 @@ module.exports = {
                 }
                 break;
             case "rogue":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "assassin":
                         const assEmbed = new response('#FFEF70', 'Assassination Rogue', "https://www.icy-veins.com/wow/assassination-rogue-pve-dps-guide",
                             'https://img.rankedboost.com/wp-content/uploads/2019/05/WoW-Classic-Rogue-Guide.png');
@@ -250,7 +245,7 @@ module.exports = {
                 }
                 break;
             case "shaman":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "elemental":
                         const elemEmbed = new response('#2686DF', 'Elemental Shaman', "https://www.icy-veins.com/wow/elemental-shaman-pve-dps-guide",
                             'https://img.rankedboost.com/wp-content/uploads/2019/05/WoW-Classic-Shaman-Guide.png');
@@ -269,7 +264,7 @@ module.exports = {
                 }
                 break;
             case "warrior":
-                switch(args[1]) {
+                switch (args[1]) {
                     case "arms":
                         const armsEmbed = new response('#AF9074', 'Arms Warrior', "https://www.icy-veins.com/wow/arms-warrior-pve-dps-guide",
                             'https://media-hearth.cursecdn.com/attachments/0/157/warrior_11.png');

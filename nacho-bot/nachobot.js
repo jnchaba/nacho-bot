@@ -7,6 +7,7 @@ const { timeStamp } = require('console');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const { errorUtil } = require('./scripts/errorUtil');
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
@@ -29,17 +30,11 @@ client.on('message', message => {
     try {
         client.commands.get(command).execute(message, args);
     } catch (error) {
-        const errorEmbed = new Discord.MessageEmbed()
-            .setColor('#ff0000')
-            .setTitle('Aw... shit')
-            .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
-            .setDescription(error)
-            .setThumbnail('https://cdn2.iconfinder.com/data/icons/picons-basic-2/57/basic2-189_bug-512.png')
-            .setImage('https://i.redd.it/jmo62jjnjg251.png')
-            .setTimestamp()
-            .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
         console.error(error);
-        message.reply(errorEmbed);
+        
+        errorUtil.error(message, {
+            description: error,
+        });
     }
 });
 

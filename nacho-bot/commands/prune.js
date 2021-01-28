@@ -1,5 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const utils = require('../scripts/utils');
+const { errorUtil } = require('../scripts/errorUtil');
+
 
 module.exports = {
     name: 'prune',
@@ -8,16 +10,7 @@ module.exports = {
         //check user has admin privs
         if (!utils.checkUserAdmin(message)) {
             //Display a message saying they don't have rights
-            const errorEmbed = new MessageEmbed()
-                .setColor('#ff0000')
-                .setTitle('And who tf are you?!')
-                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
-                .setDescription("you think just anybody can run this shit? Check your privilege snowflake")
-                .setThumbnail('https://cdn2.iconfinder.com/data/icons/picons-basic-2/57/basic2-189_bug-512.png')
-                .setImage('https://i.imgflip.com/19hgqh.jpg')
-                .setTimestamp()
-                .setFooter('this fuckin guy', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Glazed-Donut.jpg/1280px-Glazed-Donut.jpg');
-            message.reply(errorEmbed);
+            errorUtil.unauthorizedError(message);
             return;
         }
 

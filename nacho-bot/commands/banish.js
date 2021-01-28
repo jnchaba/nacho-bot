@@ -1,5 +1,6 @@
-const { Guild, MessageEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const utils = require('../scripts/utils');
+const { errorUtil } = require('../scripts/errorUtil');
 
 module.exports = {
     name: 'banish',
@@ -8,16 +9,7 @@ module.exports = {
         //check user has admin privs
         if (!utils.checkUserAdmin(message)) {
             //Display a message saying they don't have rights
-            const errorEmbed = new MessageEmbed()
-                .setColor('#ff0000')
-                .setTitle('And who tf are you?!')
-                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
-                .setDescription("you think just anybody can run this shit? Check your privilege snowflake")
-                .setThumbnail('https://cdn2.iconfinder.com/data/icons/picons-basic-2/57/basic2-189_bug-512.png')
-                .setImage('https://i.imgflip.com/19hgqh.jpg')
-                .setTimestamp()
-                .setFooter('this fuckin guy', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Glazed-Donut.jpg/1280px-Glazed-Donut.jpg');
-            message.reply(errorEmbed);
+            errorUtil.unauthorizedError(message);
             return;
         }
 
@@ -48,14 +40,10 @@ module.exports = {
         });
 
         if (targetUser === undefined) {
-            const errorEmbed = new MessageEmbed()
-                .setColor('#ff0000')
-                .setTitle('Aw, shit...')
-                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
-                .setDescription("I couldn't find that user")
-                .setTimestamp()
-                .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
-            message.reply(errorEmbed);
+            errorUtil.error(message, {
+                description: "I couldn't find that user",
+                noThumbnail: true
+            });
             return;
         }
 
@@ -69,27 +57,19 @@ module.exports = {
         })
 
         if (targetChannel === undefined) {
-            const errorEmbed = new MessageEmbed()
-                .setColor('#ff0000')
-                .setTitle('Aw, shit...')
-                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
-                .setDescription("I couldn't find that channel")
-                .setTimestamp()
-                .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
-            message.reply(errorEmbed);
+            errorUtil.error(message, {
+                description: "I couldn't find that channel",
+                noThumbnail: true
+            });
             return;
         }
 
         //set up an error message if the API rejects us
         process.on('unhandledRejection', function (err) {
-            const errorEmbed = new MessageEmbed()
-                .setColor('#ff0000')
-                .setTitle('Aw, shit...')
-                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
-                .setDescription("I don't think that user is connected to voice")
-                .setTimestamp()
-                .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
-            message.reply(errorEmbed);
+            errorUtil.error(message, {
+                description: "I don't think that user is connected to voice",
+                noThumbnail: true
+            });
             return;
         });
 

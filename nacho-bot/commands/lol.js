@@ -3,6 +3,8 @@ const request = require('request');
 const Discord = require('discord.js');
 const { prefix, token, rgapi } = require('../config.json');
 const { lolApiUtil } = require('../scripts/lolApiUtil.js');
+const { errorUtil } = require('../scripts/errorUtil');
+
 let api = TeemoJS(rgapi);
 
 const champs = {};
@@ -40,33 +42,23 @@ async function main(message, args) {
             name += " ";
         }
     }
-    if (args.length == 0 ) {
-        const errorEmbed = new Discord.MessageEmbed()
-                .setColor('#ff0000')
-                .setTitle('Gimmie a Name!')
-                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
-                .setDescription("You forgot to give me a summoner name!")
-                .setThumbnail('https://cdn2.iconfinder.com/data/icons/picons-basic-2/57/basic2-189_bug-512.png')
-                .setTimestamp()
-                .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
-            message.reply(errorEmbed);
-            return;
+    if (args.length == 0) {
+        errorUtil.error(message, {
+            title: "Gimmie a Name!",
+            description: "You forgot to give me a summoner name!",
+        });
+        return;
     }
     name = name.trim();
     if (args[args.length - 1] != 'solo' && args[args.length - 1] != 'flex') {
-        const errorEmbed = new Discord.MessageEmbed()
-                .setColor('#ff0000')
-                .setTitle('Gimmie a Queue!')
-                .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
-                .setDescription("You forgot to specify what queue you want stats for!")
-                .setThumbnail('https://cdn2.iconfinder.com/data/icons/picons-basic-2/57/basic2-189_bug-512.png')
-                .setTimestamp()
-                .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
-            message.reply(errorEmbed);
-            return;
+        errorUtil.error(message, {
+            title: "Gimmie a Queue!",
+            description: "You forgot to specify what queue you want stats for!",
+        });
+        return;
     }
     const response = message.channel;
-    
+
     const sumData = await lolApiUtil.getSummonerMetrics(name);
     var summonerName = sumData.name;
     var summonerLevel = sumData.summonerLevel;
@@ -146,14 +138,14 @@ async function main(message, args) {
             }
         }
     }
-    
+
 }
 
 module.exports = {
     name: 'lol',
     cooldown: 3,
     description: 'Fetches league data',
-    execute(message, args){
+    execute(message, args) {
         console.log("init lol");
         main(message, args).then();
     }
