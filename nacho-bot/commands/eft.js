@@ -2,6 +2,7 @@ const { MessageAttachment } = require('discord.js');
 const Discord = require('discord.js');
 const fs = require('fs');
 const utils = require('../scripts/utils');
+const { errorUtil } = require('../scripts/errorUtil');
 
 module.exports = {
     name:'eft',
@@ -12,17 +13,9 @@ module.exports = {
 
         process.on('uncaughtException', function (err) {
             console.error(err);
-            const errorEmbed = new Discord.MessageEmbed()
-                            .setColor('#ff0000')
-                            .setTitle('Aw, shit...')
-                            .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
-                            .setDescription(err)
-                            .setThumbnail('https://cdn2.iconfinder.com/data/icons/picons-basic-2/57/basic2-189_bug-512.png')
-                            .setImage('https://i.redd.it/jmo62jjnjg251.png')
-                            .setTimestamp()
-                            .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
-                        message.reply(errorEmbed);
-            console.log("Node NOT Exiting...");
+            errorUtil.error(message, {
+                description: err,
+            });
             return;
         });
 
