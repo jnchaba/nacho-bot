@@ -5,16 +5,16 @@ Teamfight Tactics: summoner history, upcoming matches, using TeemoJS NPM Package
 //name, icon, level, rank, winrate
 
 const { MessageEmbed } = require('discord.js');
-const tftApi = require ('../scripts/tftApi.js');
+const { tftApiUtil } = require ('../scripts/tftApiUtil.js');
 
 async function getSummonerData(summonerName) {
     let output = {};
     
-    const summoner = await tftApi.getSummonerByName(summonerName);
+    const summoner = await tftApiUtil.getSummonerByName(summonerName);
     if (summoner === null) {
         return undefined;
     }
-    const entries = await tftApi.getLeagueEntries(summoner.id);
+    const entries = await tftApiUtil.getLeagueEntries(summoner.id);
     const entry = entries[0];
 
     output.name = summoner.name;
