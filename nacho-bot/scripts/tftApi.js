@@ -17,7 +17,7 @@ async function getSummonerData(summonerName) {
     if (summoner === null) {
         return undefined;
     }
-    const entries = await getLeagueEntries(summoner.id);//UtcMpsT00sv70OmKiRsdZY9mJTBOF7tjhvczP9zIzoHw80w
+    const entries = await getLeagueEntries(summoner.id);
     const entry = entries[0];
 
     output.name = summoner.name;
