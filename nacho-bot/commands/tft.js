@@ -5,11 +5,35 @@ Teamfight Tactics: summoner history, upcoming matches, using TeemoJS NPM Package
 //name, icon, level, rank, winrate
 
 const { MessageEmbed } = require('discord.js');
-const TeemoJS = require('teemojs');
-const request = require('request');
-const { prefix, token, rgapi } = require('../config.json');
-const { match } = require('assert');
-let teemo = TeemoJS(rgapi);
+const { tftApiUtil } = require ('../scripts/tftApiUtil.js');
+
+async function getSummonerData(summonerName) {
+    let output = {};
+    
+    const summoner = await tftApiUtil.getSummonerByName(summonerName);
+    if (summoner === null) {
+        return undefined;
+    }
+    const entries = await tftApiUtil.getLeagueEntries(summoner.id);
+    const entry = entries[0];
+
+    output.name = summoner.name;
+    output.icon = summoner.profileIconId;
+    output.level = summoner.summonerLevel;
+
+    if (entry === undefined) {
+        output.rank = "unranked scrub";
+        output.lp = "-1";
+        output.winrate = "probably terrible";
+    }
+    else {
+        output.rank = `${entry.tier} - ${entry.rank}`;
+        output.lp = entry.leaguePoints;
+        const winrateCalc = (parseInt(entry.wins) / parseInt(entry.losses) * 100).toFixed(2);
+        output.winrate = `${entry.wins}/${entry.losses} (${winrateCalc}%)`;
+    }
+    return output;
+}
 
 async function main(message, args) {
     if (args.length == 0) {
@@ -61,6 +85,7 @@ async function main(message, args) {
     message.reply(summonerDataEmbed);
 }
 
+<<<<<<< HEAD
 async function getSummonerData(summonerName) {
     let output = {};
 
@@ -97,6 +122,8 @@ function getLeagueEntries(summonerId) {
     return teemo.get('na1', 'tftLeague.getLeagueEntriesForSummoner', summonerId);
 }
 
+=======
+>>>>>>> 2144e2a4a6b258bd8948874e363bfdbbc3693a37
 module.exports = {
     name: 'tft',
     description: 'tft utils',
