@@ -6,6 +6,7 @@ Teamfight Tactics: summoner history, upcoming matches, using TeemoJS NPM Package
 
 const { MessageEmbed } = require('discord.js');
 const { tftApiUtil } = require ('../scripts/tftApiUtil.js');
+const { riotAccountUtil } = require('../scripts/riotAccountUtil.js');
 
 async function getSummonerData(summonerName) {
     let output = {};
@@ -66,11 +67,11 @@ async function main(message, args) {
         .setColor('#ff0000')
         .setTitle('TFT Stats')
         .setAuthor('nacho-bot', 'https://cdn.discordapp.com/app-icons/769781677747863592/fd1ed280e50b3f16bc401dd698b8096b.png?size=256')
+        .setThumbnail(riotAccountUtil.getSummonerIconURL(summoner))
         .setTimestamp()
         .setFooter('Command currently being developed', 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=');
-
+    
     summonerDataEmbed.addField("Summoner Name", summoner.name);
-    summonerDataEmbed.addField("Summoner Icon", summoner.icon);
     summonerDataEmbed.addField("Level", summoner.level);
     summonerDataEmbed.addField("Rank", summoner.rank);
     summonerDataEmbed.addField("Winrate", summoner.winrate);

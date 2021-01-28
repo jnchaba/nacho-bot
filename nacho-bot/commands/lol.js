@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const { prefix, token, rgapi } = require('../config.json');
 const { lolApiUtil } = require('../scripts/lolApiUtil.js');
 const { errorUtil } = require('../scripts/errorUtil');
+const { riotAccountUtil } = require('../scripts/riotAccountUtil');
 
 let api = TeemoJS(rgapi);
 
@@ -60,9 +61,10 @@ async function main(message, args) {
     const response = message.channel;
 
     const sumData = await lolApiUtil.getSummonerMetrics(name);
+    console.log(sumData);
     var summonerName = sumData.name;
     var summonerLevel = sumData.summonerLevel;
-    var summonerIcon = sumData.profileIconId;
+    var summonerIconString = riotAccountUtil.getSummonerIconURL(sumData);
     //const champData = await getMasteryData(sumData.id);
     const rankedData = await lolApiUtil.getRankedData(sumData.id);
     var rank;
@@ -70,7 +72,6 @@ async function main(message, args) {
     var losses;
     var total;
     var winrate;
-    console.log(rankedData);
     if (rankedData.length === 0) {
         const norankEmbed = new Discord.MessageEmbed()
             .setColor('#C6AD64')
@@ -80,7 +81,7 @@ async function main(message, args) {
             .addField('Summoner Level: ', summonerLevel, false)
             .addField('Rank: ', '**Unranked**', false)
             .addField('Total Ranked Games Played: ', '**None**', false)
-            .setThumbnail('http://ddragon.leagueoflegends.com/cdn/10.23.1/img/profileicon/' + icons[summonerIcon])
+            .setThumbnail(summonerIconString)
             .setTimestamp()
             .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
         message.reply(norankEmbed);
@@ -104,7 +105,7 @@ async function main(message, args) {
                 .addField('Wins: ', wins, false)
                 .addField('Losses: ', losses, false)
                 .addField('Winrate: ', winrate + '%', false)
-                .setThumbnail('http://ddragon.leagueoflegends.com/cdn/10.23.1/img/profileicon/' + icons[summonerIcon])
+                .setThumbnail(summonerIconString)
                 .setTimestamp()
                 .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
             if (args[args.length - 1] === 'solo') {
@@ -129,7 +130,7 @@ async function main(message, args) {
                 .addField('Wins: ', wins, false)
                 .addField('Losses: ', losses, false)
                 .addField('Winrate: ', winrate + '%', false)
-                .setThumbnail('http://ddragon.leagueoflegends.com/cdn/10.23.1/img/profileicon/' + icons[summonerIcon])
+                .setThumbnail(summonerIconString)
                 .setTimestamp()
                 .setFooter('"It Just Works"', 'https://i.imgur.com/824WrKf.png')
             if (args[args.length - 1] === 'flex') {
