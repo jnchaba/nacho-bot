@@ -2,6 +2,7 @@ const TeemoJS = require('teemojs');
 const request = require('request');
 const Discord = require('discord.js');
 const { prefix, token, rgapi } = require('../config.json');
+const { lolApiUtil } = require('../scripts/lolApiUtil.js');
 let api = TeemoJS(rgapi);
 
 const champs = {};
@@ -30,78 +31,6 @@ request({
     }
 });
 
-function getSummonerData(name) {
-    return new Promise((resolve, reject) => {
-        api.get('na1', 'summoner.getBySummonerName', name)
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => {
-                reject(error);
-            });
-    });
-}
-
-function getMatchListData(summonerId, champId) {
-    return new Promise((resolve, reject) => {
-        api.get('na1', 'match.getMatchlist', summonerId, { champion: champId, endIndex: 10 })
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => {
-                reject(error);
-            });
-    });
-}
-
-function getMatchData(matchID) {
-    return new Promise((resolve, reject) => {
-        api.get('na1', 'match.getMatch', matchID)
-        .then(data => {
-            resolve(data);
-        })
-        .catch(error =>{
-            reject(error);
-        });
-    });
-}
-
-function getMasteryData(summonerId) {
-    return new Promise((resolve, reject) => {
-        api.get('na1', 'championMastery.getAllChampionMasteries', summonerId)
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => {
-                reject(error);
-            });
-    });
-}
-
-function getRankedData(summonerId) {
-    return new Promise((resolve, reject) => {
-        api.get('na1', 'league.getLeagueEntriesForSummoner', summonerId)
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => {
-                reject(error);
-            });
-    });
-}
-
-function getActiveGameData(summonerId) {
-    return new Promise((resolve, reject) => {
-        api.get('na1', 'spectator.getCurrentGameInfoBySummoner', summonerId)
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => {
-                reject(error);
-            });
-    });
-}
-
 async function main(message, args) {
     console.log(args);
     if(args[0] != undefined) {
@@ -114,10 +43,10 @@ async function main(message, args) {
                 name += " ";
             }
         }
-        const sumData = await getSummonerData(name);
-        const champData = await getMasteryData(sumData.id);
-        const rankData = await getRankedData(sumData.id);
-        const gameData = await getActiveGameData(sumData.id);
+        const sumData = await lolApiUtil.getSummonerData(name);
+        const champData = await lolApiUtil.getMasteryData(sumData.id);
+        const rankData = await lolApiUtil.getRankedData(sumData.id);
+        const gameData = await lolApiUtil.getActiveGameData(sumData.id);
 
         const gameIds = [];
         let matchListData = null;

@@ -7,9 +7,9 @@ Teamfight Tactics: summoner history, upcoming matches, using TeemoJS NPM Package
 const { MessageEmbed } = require('discord.js');
 const TeemoJS = require('teemojs');
 const request = require('request');
-const { prefix, token, mikesRiotAPIKey } = require('../config.json');
+const { prefix, token, rgapi } = require('../config.json');
 const { match } = require('assert');
-let teemo = TeemoJS(mikesRiotAPIKey);
+let teemo = TeemoJS(rgapi);
 
 async function main(message, args) {
     if (args.length == 0) {
@@ -89,12 +89,12 @@ async function getSummonerData(summonerName) {
     return output;
 }
 
-async function getSummonerByName(summonerName) {
-    return await teemo.get('na1', 'tftSummoner.getBySummonerName', summonerName);
+function getSummonerByName(summonerName) {
+    return teemo.get('na1', 'tftSummoner.getBySummonerName', summonerName);
 }
 
-async function getLeagueEntries(summonerId) {
-    return await teemo.get('na1', 'tftLeague.getLeagueEntriesForSummoner', summonerId);
+function getLeagueEntries(summonerId) {
+    return teemo.get('na1', 'tftLeague.getLeagueEntriesForSummoner', summonerId);
 }
 
 module.exports = {
