@@ -30,9 +30,9 @@ function error(message, errobj) {
     }
 
     if (errobj.description) {
-        errorEmbed.setDescription(errobj.description);
+        errorEmbed.setTitle(errobj.description);
     } else {
-        errorEmbed.setDescription(defaultDescription);
+        errorEmbed.setTitle(defaultDescription);
     }
 
     if (errobj.thumbnail !== undefined) {
