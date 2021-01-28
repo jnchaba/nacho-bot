@@ -44,6 +44,10 @@ async function main(message, args) {
                 }
             }
             const sumData = await lolApiUtil.getSummonerMetrics(name);
+            if (sumData == undefined) {
+                message.channel.send('**Go lay an egg, ya dingus!** Reason: You gave me an invalid summoner name!');
+                return;
+            }
             let champData = (await lolApiUtil.getMasteryData(sumData.id)).slice(0, 3);
             const rankData = await lolApiUtil.getRankedData(sumData.id);
             
