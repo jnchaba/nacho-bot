@@ -1,6 +1,6 @@
 const fs = require('fs');
 var scrape = require('./scripts/scrape.js');
-const { prefix, token, mikesRiotAPIKey } = require('./config.json');
+const { prefix, token, rgapi } = require('./config.json');
 
 const Discord = require('discord.js');
 const { timeStamp } = require('console');

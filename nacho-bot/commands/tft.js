@@ -85,6 +85,45 @@ async function main(message, args) {
     message.reply(summonerDataEmbed);
 }
 
+<<<<<<< HEAD
+async function getSummonerData(summonerName) {
+    let output = {};
+
+    const summoner = await getSummonerByName(summonerName);
+    if (summoner === null) {
+        return undefined;
+    }
+    const entries = await getLeagueEntries(summoner.id);//UtcMpsT00sv70OmKiRsdZY9mJTBOF7tjhvczP9zIzoHw80w
+    const entry = entries[0];
+
+    output.name = summoner.name;
+    output.icon = summoner.profileIconId;
+    output.level = summoner.summonerLevel;
+
+    if (entry === undefined) {
+        output.rank = "unranked scrub";
+        output.lp = "-1";
+        output.winrate = "probably terrible";
+    }
+    else {
+        output.rank = `${entry.tier} - ${entry.rank}`;
+        output.lp = entry.leaguePoints;
+        const winrateCalc = (parseInt(entry.wins) / parseInt(entry.losses) * 100).toFixed(2);
+        output.winrate = `${entry.wins}/${entry.losses} (${winrateCalc}%)`;
+    }
+    return output;
+}
+
+function getSummonerByName(summonerName) {
+    return teemo.get('na1', 'tftSummoner.getBySummonerName', summonerName);
+}
+
+function getLeagueEntries(summonerId) {
+    return teemo.get('na1', 'tftLeague.getLeagueEntriesForSummoner', summonerId);
+}
+
+=======
+>>>>>>> 2144e2a4a6b258bd8948874e363bfdbbc3693a37
 module.exports = {
     name: 'tft',
     description: 'tft utils',
