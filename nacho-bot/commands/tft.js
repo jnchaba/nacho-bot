@@ -7,6 +7,34 @@ Teamfight Tactics: summoner history, upcoming matches, using TeemoJS NPM Package
 const { MessageEmbed } = require('discord.js');
 const tftApi = require ('../scripts/tftApi.js');
 
+async function getSummonerData(summonerName) {
+    let output = {};
+    
+    const summoner = await tftApi.getSummonerByName(summonerName);
+    if (summoner === null) {
+        return undefined;
+    }
+    const entries = await tftApi.getLeagueEntries(summoner.id);
+    const entry = entries[0];
+
+    output.name = summoner.name;
+    output.icon = summoner.profileIconId;
+    output.level = summoner.summonerLevel;
+
+    if (entry === undefined) {
+        output.rank = "unranked scrub";
+        output.lp = "-1";
+        output.winrate = "probably terrible";
+    }
+    else {
+        output.rank = `${entry.tier} - ${entry.rank}`;
+        output.lp = entry.leaguePoints;
+        const winrateCalc = (parseInt(entry.wins) / parseInt(entry.losses) * 100).toFixed(2);
+        output.winrate = `${entry.wins}/${entry.losses} (${winrateCalc}%)`;
+    }
+    return output;
+}
+
 async function main(message, args) {
     if (args.length == 0) {
         const errorEmbed = new MessageEmbed()
@@ -28,7 +56,7 @@ async function main(message, args) {
         }
     }
     
-    const summoner = await tftApi.getSummonerData(summonerName);
+    const summoner = await getSummonerData(summonerName);
 
     if (summoner === undefined) {
         const errorEmbed = new MessageEmbed()
