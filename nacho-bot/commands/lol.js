@@ -8,31 +8,10 @@ const { riotAccountUtil } = require('../scripts/riotAccountUtil');
 
 let api = TeemoJS(rgapi);
 
-const champs = {};
-const icons = {};
 const matchIds = [];
 const champIds = [];
 const solo = 'RANKED_SOLO_5x5';
 const flex = 'RANKED_FLEX_SR';
-
-request({
-    url: 'http://ddragon.leagueoflegends.com/cdn/10.23.1/data/en_US/championFull.json',
-    json: true,
-}, function (error, response, body) {
-    for (const key in body.keys) {
-        body.keys[key] = body.keys[key].replace(/([a-z])([A-Z])/g, '$1 $2');
-        champs[key] = body.keys[key];
-    }
-});
-
-request({
-    url: 'http://ddragon.leagueoflegends.com/cdn/10.23.1/data/en_US/profileicon.json',
-    json: true,
-}, function (error, response, body) {
-    for (const key in body.data) {
-        icons[key] = body.data[key].image.full;
-    }
-});
 
 async function main(message, args) {
     var argv = 0;
@@ -65,7 +44,6 @@ async function main(message, args) {
     var summonerName = sumData.name;
     var summonerLevel = sumData.summonerLevel;
     var summonerIconString = riotAccountUtil.getSummonerIconURL(sumData);
-    //const champData = await getMasteryData(sumData.id);
     const rankedData = await lolApiUtil.getRankedData(sumData.id);
     var rank;
     var wins;

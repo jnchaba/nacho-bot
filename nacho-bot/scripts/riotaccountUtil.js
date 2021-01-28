@@ -13,6 +13,9 @@ request({
 
 function getSummonerIconURL(sumData) {
     var summonerIcon = sumData.profileIconId;
+    if (summonerIcon == undefined) {
+        summonerIcon = sumData.icon;
+    }
     return ('http://ddragon.leagueoflegends.com/cdn/10.23.1/img/profileicon/' + 
         icons[summonerIcon]);
 }
