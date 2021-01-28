@@ -40,7 +40,6 @@ async function main(message, args) {
     const response = message.channel;
 
     const sumData = await lolApiUtil.getSummonerMetrics(name);
-    console.log(sumData);
     var summonerName = sumData.name;
     var summonerLevel = sumData.summonerLevel;
     var summonerIconString = riotAccountUtil.getSummonerIconURL(sumData);
