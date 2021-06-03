@@ -32,7 +32,6 @@ request({
 });
 
 async function main(message, args) {
-    console.log(args);
     if (args[0] != undefined) {
         const msg = await message.channel.send('Fetching LoL Data...');
         try {
@@ -97,11 +96,13 @@ async function main(message, args) {
             
             if (!isRanked)    {
                 profileEmbed.addField('Level:', sumData.summonerLevel, true);
+                profileEmbed.addField('\u200B', '\u200B', true);
+                profileEmbed.addField('\u200B', '\u200B', true);
             }
 
-            profileEmbed.addFields(
-                { name: '\u200B', value: '\u200B' }, //\u200B is a zero width space, for formatting
-            )
+            // profileEmbed.addFields(
+            //     { name: '\u200B', value: '\u200B' } //\u200B is a zero width space, for formatting
+            // )
             
             for (let i = 0; i < 3; i++) {
                 profileEmbed.addFields({ 
@@ -149,7 +150,7 @@ module.exports = {
     cooldown: 3,
     description: 'Fetches league data',
     execute(message, args) {
-        console.log("init lol");
+        console.log("init lolwr");
         main(message, args).then();
     }
 }

@@ -15,7 +15,6 @@ function getMatchData(matchID) {
 }
 
 function getMatchListData(accountID, champId) {
-    console.log(champId);
     return api.get('na1', 'match.getMatchlist', accountID, { champion: champId, endIndex: 10 });
 }
 
