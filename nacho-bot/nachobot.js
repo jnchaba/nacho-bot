@@ -38,22 +38,22 @@ client.on('message', message => {
     }
 });
 
-let now = new Date();
-let day;
-let logged = false;
+// let now = new Date();
+// let day;
+// let logged = false;
 
-var interval = setInterval(function(){
-    now = new Date();
-    if (day != now.getDay()) {
-        scrape.scrape();
-        day = now.getDay();
-        logged = false;
-    } else {
-        if (!logged) {
-            //console.log('Already Scraped Today!');
-            logged = true;
-        }
-    }
-}, 10000);
+// var interval = setInterval(function(){
+//     now = new Date();
+//     if (day != now.getDay()) {
+//         scrape.scrape();
+//         day = now.getDay();
+//         logged = false;
+//     } else {
+//         if (!logged) {
+//             //console.log('Already Scraped Today!');
+//             logged = true;
+//         }
+//     }
+// }, 10000);
 
 client.login(token);

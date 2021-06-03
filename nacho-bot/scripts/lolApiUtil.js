@@ -1,6 +1,6 @@
 const TeemoJS = require('teemojs');
-const { rgapi } = require('../config.json');
-let api = TeemoJS(rgapi);
+const { lolapi } = require('../config.json');
+let api = TeemoJS(lolapi);
 
 function getSummonerMetrics(name) {
     return api.get('na1', 'summoner.getBySummonerName', name);

@@ -21,6 +21,19 @@ module.exports = {
 
         switch(args[0]) {
             case "scrape":
+                var enabled = 0;
+                if (enabled == 0) {
+                    var errorObj = {
+                        title: 'Shitfuck',
+                        descripton: 'honk'
+                    };
+                    errorUtil.error(message, {
+                        description: ''
+
+                    });
+                    responded = true;
+                    break;
+                } else {
                 var data = fs.readFileSync('./marketdata.json', 'utf-8');
                 var mdate = utils.getFileUpdatedDate('./marketdata.json');
                 var words = JSON.parse(data);
@@ -42,6 +55,7 @@ module.exports = {
                 scrapeEmbed.setFooter('Data scraped on: ' + mdate, 'https://cdn.discordapp.com/emojis/713166932538556499.png?v=');
                 response.send(scrapeEmbed);
                 responded = true;
+                }
                 break;
             case "hideout":
                 response.send(new MessageAttachment("./images/hideout.png"));

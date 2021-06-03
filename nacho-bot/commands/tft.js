@@ -7,6 +7,7 @@ Teamfight Tactics: summoner history, upcoming matches, using TeemoJS NPM Package
 const { MessageEmbed } = require('discord.js');
 const { tftApiUtil } = require ('../scripts/tftApiUtil.js');
 const { riotAccountUtil } = require('../scripts/riotAccountUtil.js');
+const { errorUtil } = require('../scripts/errorUtil.js');
 
 async function getSummonerData(summonerName) {
     let output = {};

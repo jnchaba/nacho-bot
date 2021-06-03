@@ -1,12 +1,11 @@
 const TeemoJS = require('teemojs');
 const request = require('request');
 const Discord = require('discord.js');
-const { prefix, token, rgapi } = require('../config.json');
+const { prefix, token } = require('../config.json');
 const { lolApiUtil } = require('../scripts/lolApiUtil.js');
 const { errorUtil } = require('../scripts/errorUtil');
 const { riotAccountUtil } = require('../scripts/riotAccountUtil');
 
-let api = TeemoJS(rgapi);
 
 const matchIds = [];
 const champIds = [];
@@ -14,6 +13,7 @@ const solo = 'RANKED_SOLO_5x5';
 const flex = 'RANKED_FLEX_SR';
 
 async function main(message, args) {
+    console.log('rgapi', rgapi);
     var argv = 0;
     var name = '';
     for (let i = 0; i < args.length - 1; i++) {
