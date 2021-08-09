@@ -40,6 +40,10 @@ function checkUserAdmin(message) {
     return isvalid;
 }
 
+function checkSuperUser(message) {
+    return message.author == 194630142029594625 ? true : false;
+}
+
 function getFileUpdatedDate(path) {
     const status = fs.statSync(path);
     return status.mtime.toLocaleString();
@@ -49,3 +53,4 @@ function getFileUpdatedDate(path) {
 module.exports.getMessagesBulk = getMessagesBulk;
 module.exports.checkUserAdmin = checkUserAdmin;
 module.exports.getFileUpdatedDate = getFileUpdatedDate;
+module.exports.checkSuperUser = checkSuperUser;
