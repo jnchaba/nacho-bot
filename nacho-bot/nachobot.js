@@ -1,3 +1,4 @@
+//test
 const fs = require('fs');
 var scrape = require('./scripts/scrape.js');
 const { prefix, token, rgapi } = require('./config.json');
