@@ -3,7 +3,8 @@
 <p>
 <ul>
 <li> This bot was made using the Discord.js library. It is custom made for a Discord server used by my friends and I. </li>
- <li>  <strong> This project is not receiving new features until the codebase is fully migrated to use Discord.JS V13 in order to support slash commands </strong> </li>
+ <li>  <strong> This project is not receiving new features until the codebase is fully migrated to use Discord.JS V13 in order to support slash commands </strong></li>
+ <li> This code got me my first ever programming job! </li>
 </ul>
 </p>
 <h3> Functionality </h3>
