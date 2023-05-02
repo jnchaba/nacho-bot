@@ -1,4 +1,5 @@
 # A complete re-work of Nacho Bot.
+- _upgraded to DiscordJS v14_
 - _re-written in TypeScript_
 - _connected to a MongoDB Cluster via MongoAtlas & mongoose_
 
