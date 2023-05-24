@@ -13,6 +13,7 @@ export const User = new Schema({
 	discordId: String,
 	score: Number,
 	day: Number,
+	week: Number,
 	inventory: [],
 	timestamp: Number
 });

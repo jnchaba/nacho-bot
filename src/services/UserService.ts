@@ -12,16 +12,25 @@ const updateUserData = async (User: IUser) => {
 };
 
 const getUserData = async (id: string) => {
-	const userData =
-		(await UserModel.findOne({ discordId: id })) ||
-		(await UserModel.create({
-			discordId: id,
-			score: 0,
-			day: 0,
-			inventory: [],
-			timestamp: Date.now(),
-		}));
+	const userData = (await UserModel.findOne({ discordId: id })) || null;
 	return userData;
 };
 
-export const UserService = { updateUserData, getUserData};
+const createNewUser = async (id: string) => {
+	const doesUserExist = await getUserData(id);
+	if (doesUserExist === null) {
+		const userData = await UserModel.create({
+			discordId: id,
+			score: 0,
+			day: 0,
+			week: 0,
+			inventory: [],
+			timestamp: Date.now(),
+		});
+		return userData;
+	} else {
+		return doesUserExist;
+	}
+}
+
+export const UserService = { createNewUser, updateUserData, getUserData};
