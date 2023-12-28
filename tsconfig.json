@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "CommonJS",
+    "target": "ESNext",
+    "module": "commonjs",
     "rootDir": "./src",
-    "outDir": "./prod",
-    "strict": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "strict": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true
   }
 }

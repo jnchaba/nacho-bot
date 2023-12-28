@@ -1,24 +1,29 @@
-const { Client, GatewayIntentBits, Partials } = require('discord.js');
-import { Interaction } from "discord.js";
-import { connectDatabase } from "./database/connectDatabase";
-import { validateEnv } from "./utils/validateEnv"
-import { onInteraction } from "./events/onInteraction";
-import { onReady } from "./events/onReady";
+import { Client } from "discord.js";
+import { config } from "./config";
+import { commands } from "./commands";
+import { deployCommands } from "./scripts/deploy-commands";
 
+const client = new Client({
+  intents: ["Guilds", "GuildMessages", "DirectMessages"],
+});
 
-(async () => {
-	if (!validateEnv()) return;
+client.once("ready", async() => {
+  console.log("Discord bot is ready! 🤖");
+  await deployCommands({ guildId: "469341271484530688"});
+});
 
-	const BOT = new Client({ intents: [GatewayIntentBits.Guilds], partials: [Partials.Channel] });
+client.on("guildCreate", async (guild) => {
+  await deployCommands({ guildId: "469341271484530688"});
+});
 
-	BOT.on("ready", async () => await onReady(BOT));
-	BOT.on(
-		"interactionCreate",
-		async (interaction: Interaction) => await onInteraction(interaction)
-	);
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isCommand()) {
+    return;
+  }
+  const { commandName } = interaction;
+  if (commands[commandName as keyof typeof commands]) {
+    commands[commandName as keyof typeof commands].execute(interaction);
+  }
+});
 
-	await connectDatabase();
-
-	await BOT.login(process.env.BOT_TOKEN);
-	
-})();
+client.login(config.BOT_TOKEN);

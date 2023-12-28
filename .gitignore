@@ -2,7 +2,7 @@
 /node_modules
 
 # Directories
-/prod
+/dist
 
 # Secrets
 .env
