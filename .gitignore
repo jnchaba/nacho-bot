@@ -1,10 +1,8 @@
-# Executables
-*.env
+# Node modules
+/node_modules
 
-# JSON config Files
-config.json
-servers.json
+# Directories
+/dist
 
-#directories
-/nacho-bot/node_modules/*
-/nacho-bot/marketdata.json
+# Secrets
+.env
