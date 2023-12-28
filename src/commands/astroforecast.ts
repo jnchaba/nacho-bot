@@ -9,7 +9,7 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction: CommandInteraction) {
 	try {
 		console.log('running astroforecast...')
-		await interaction.deferReply({ ephemeral: true });
+		await interaction.deferReply({ ephemeral: false });
 
 		let astroForecast = await fetch(`https://api.stormglass.io/v2/astronomy/point?lat=35.7126&lng=79.0363`, {
 			headers: {
