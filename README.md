@@ -3,7 +3,7 @@
 <p>
 <ul>
 <li> This bot was made using the Discord.js library. It is custom made for a Discord server used by my friends and I. </li>
- <li>  <strong> This project is not receiving new features until the codebase is fully migrated to use Discord.JS V13 in order to support slash commands </strong> </li>
+ <li>  <strong> This project is permanently archived. Working on this cocdebase helped me land my first software engineering job. I am keeping it in this state so I can look back at the spaghetti that started it all and have a frame of reference of "where I came from".</strong> </li>
 </ul>
 </p>
 <h3> Functionality </h3>
@@ -13,20 +13,20 @@
  </ul>
  
  
-![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/error.PNG?raw=true)
+![image](https://github.com/jnchaba/nacho-bot/blob/main/Docs/error.PNG?raw=true)
  
  
  <ul>
 <li> Commands to show the login information for game servers hosted alongside Nacho-Bot </li>
 </ul>
 
-![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/terraria.png?raw=true)
+![image](https://github.com/jnchaba/nacho-bot/blob/main/Docs/terraria.png?raw=true)
 
 <ul>
 <li> Integration with servers showing player stats </li>
 </ul>
 
-![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/mcstatus.png?raw=true)
+![image](https://github.com/jnchaba/nacho-bot/blob/main/Docs/mcstatus.png?raw=true)
 
 <ul>
 <li> Funny memes </li>
@@ -38,7 +38,7 @@ Escape from Tarkov
 <li> Displays maps for Escape From Tarkov, in discord </li>
 </ul>
 
-![image](https://github.com/jnchaba/nacho-bot/blob/main/nacho-bot/Docs/nachoeft.png?raw=true)
+![image](https://github.com/jnchaba/nacho-bot/blob/main/Docs/nachoeft.png?raw=true)
 
 <ul>
 <li> Displays hideout information for optimal hideout progression </li>
@@ -90,4 +90,3 @@ User Interaction
 <li> StackOverflow search tool </li>
 </ul>
 
-<h3>... and perhaps more in the future</h3>
